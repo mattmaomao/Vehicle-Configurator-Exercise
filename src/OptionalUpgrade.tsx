@@ -40,6 +40,8 @@ export default function OptionalUpgrade({
       ...UserSelection,
       upgrades: selectedUpgrade ? [selectedUpgrade] : [],
     });
+
+    nav("/summary");
   }
 
   function handleBack() {
