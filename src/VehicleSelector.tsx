@@ -40,7 +40,9 @@ export default function VehicleSelector({
     <div className="flex justify-center items-center h-screen">
       <div className="center w-4/5 m-auto p-2">
         <div className="flex justify-between items-center mb-2">
-          <header className="text-lg font-semibold mb-2">Select a vehicle</header>
+          <header className="text-lg font-semibold mb-2">
+            Select a vehicle
+          </header>
           <KeyboardLegend />
         </div>
         <form className="flex" action="" onSubmit={handleSubmit}>
@@ -59,9 +61,9 @@ export default function VehicleSelector({
               <SelectContent>
                 <SelectGroup>
                   <SelectItem value="">Year</SelectItem>
-                  <SelectItem value="1">2026</SelectItem>
-                  <SelectItem value="2">2025</SelectItem>
-                  <SelectItem value="3">2024</SelectItem>
+                  <SelectItem value="2026">2026</SelectItem>
+                  <SelectItem value="2025">2025</SelectItem>
+                  <SelectItem value="2024">2024</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
@@ -83,14 +85,14 @@ export default function VehicleSelector({
                 <SelectGroup>
                   <SelectItem value="">Make</SelectItem>
                   <SelectLabel>Top Make</SelectLabel>
-                  <SelectItem value="1">Make 1</SelectItem>
-                  <SelectItem value="2">Make 2</SelectItem>
-                  <SelectItem value="3">Make 3</SelectItem>
+                  <SelectItem value="Make 1">Make 1</SelectItem>
+                  <SelectItem value="Make 2">Make 2</SelectItem>
+                  <SelectItem value="Make 3">Make 3</SelectItem>
                 </SelectGroup>
                 <SelectGroup>
-                  <SelectItem value="4">Make 4</SelectItem>
-                  <SelectItem value="5">Make 5</SelectItem>
-                  <SelectItem value="6">Make 6</SelectItem>
+                  <SelectItem value="Make 4">Make 4</SelectItem>
+                  <SelectItem value="Make 5">Make 5</SelectItem>
+                  <SelectItem value="Make 6">Make 6</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
@@ -108,9 +110,9 @@ export default function VehicleSelector({
               <SelectContent>
                 <SelectGroup>
                   <SelectItem value="">Model</SelectItem>
-                  <SelectItem value="1">Model 1</SelectItem>
-                  <SelectItem value="2">Model 2</SelectItem>
-                  <SelectItem value="3">Model 3</SelectItem>
+                  <SelectItem value="Model 1">Model 1</SelectItem>
+                  <SelectItem value="Model 2">Model 2</SelectItem>
+                  <SelectItem value="Model 3">Model 3</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
