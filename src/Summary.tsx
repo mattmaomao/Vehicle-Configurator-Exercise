@@ -12,7 +12,7 @@ import { ChevronsUpDownIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
 
-export default function OptionalUpgrade({
+export default function Summary({
   UserSelection,
   onSelectionChange,
 }: {
@@ -51,7 +51,7 @@ export default function OptionalUpgrade({
     <div className="flex justify-center items-center h-screen">
       <div className="center w-4/5 m-auto p-2">
         <header className="text-lg font-semibold mb-2">
-          Select Optional Upgrades
+          Optional Upgrades
         </header>
         <div className="flex flex-col justify-center items-center gap-3 w-full">
           <div className="w-full">
@@ -85,27 +85,8 @@ export default function OptionalUpgrade({
                         "flex justify-between items-center border px-4 py-2 hover:ring-2 hover:ring-red-200 hover:cursor-pointer",
                         isSelected && "ring-2 ring-green-400",
                       )}
-                      onClick={() => {
-                        if (isSelected) setSelectedUpgrade(null);
-                        else {
-                          setSelectedUpgrade(upgrade);
-                        }
-                      }}
                     >
                       <span>{UPGRADE_LABELS[upgrade]}</span>
-                      <button
-                        type="button"
-                        role="radio"
-                        aria-checked={isSelected}
-                        className={cn(
-                          "py-1 px-2 hover:bg-red-200",
-                          isSelected
-                            ? "bg-green-500 text-white"
-                            : "bg-gray-100",
-                        )}
-                      >
-                        {isSelected ? "SELECTED" : "SELECT"}
-                      </button>
                     </div>
                   );
                 })}
