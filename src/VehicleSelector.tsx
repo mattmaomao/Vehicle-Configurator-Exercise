@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { UserSelections } from "./types/configurator.ts";
+import { KeyboardLegend } from "./components/KeyboardLegend.tsx";
 
 import {
   Select,
@@ -38,7 +39,10 @@ export default function VehicleSelector({
   return (
     <div className="flex justify-center items-center h-screen">
       <div className="center w-4/5 m-auto p-2">
-        <header className="text-lg font-semibold mb-2">Select a vehicle</header>
+        <div className="flex justify-between items-center mb-2">
+          <header className="text-lg font-semibold mb-2">Select a vehicle</header>
+          <KeyboardLegend />
+        </div>
         <form className="flex" action="" onSubmit={handleSubmit}>
           <div className="h-full w-full text-black bg-gray-100 rounded-md">
             <Select
