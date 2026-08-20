@@ -35,18 +35,30 @@ export default function OptionalUpgrade({
       : null,
   );
 
+  const SIMULATED_DELAY_MS = 1200;
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isComplete, setIsComplete] = useState(false);
+
   function handleSubmit() {
     onSelectionChange({
       ...UserSelection,
       upgrades: selectedUpgrade ? [selectedUpgrade] : [],
     });
 
-    nav("/summary");
+    setIsSubmitting(true);
+    window.setTimeout(() => {
+      setIsSubmitting(false);
+      setIsComplete(true);
+    }, SIMULATED_DELAY_MS);
   }
 
   function handleBack() {
     // navigate to previous step
     nav("/seat-coverage");
+  }
+
+  if (isComplete) {
+    nav("/summary");
   }
 
   return (
@@ -121,6 +133,7 @@ export default function OptionalUpgrade({
           onContinue={() => {
             handleSubmit();
           }}
+          spinner={isSubmitting}
         />
       </div>
     </div>
