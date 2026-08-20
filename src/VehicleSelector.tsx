@@ -31,16 +31,16 @@ export default function VehicleSelector({
       ...UserSelection,
       vehicle: { year, make, model },
     });
-    
+
     nav("/seat-coverage");
   }
 
   return (
     <div className="flex justify-center items-center h-screen">
-      <div className="bg-gray-900 text-white center w-4/5 m-auto ">
-        <header>Select a vehicle</header>
-        <form className="flex items-center" action="" onSubmit={handleSubmit}>
-          <div className="w-full">
+      <div className="center w-4/5 m-auto p-2">
+        <header className="text-lg font-semibold mb-2">Select a vehicle</header>
+        <form className="flex" action="" onSubmit={handleSubmit}>
+          <div className="h-full w-full text-black bg-gray-100 rounded-md">
             <Select
               onValueChange={(e) => {
                 setYear(e);
@@ -63,7 +63,7 @@ export default function VehicleSelector({
             </Select>
           </div>
 
-          <div className="w-full">
+          <div className="h-full w-full text-black bg-gray-100 rounded-md">
             <Select
               disabled={year === ""}
               onValueChange={(e) => {
@@ -92,7 +92,7 @@ export default function VehicleSelector({
             </Select>
           </div>
 
-          <div className="w-full">
+          <div className="h-full w-full text-black bg-gray-100 rounded-md">
             <Select
               disabled={make === ""}
               onValueChange={(e) => setModel(e)}
@@ -112,7 +112,7 @@ export default function VehicleSelector({
             </Select>
           </div>
           <button
-            className="py-2 px-4 bg-red-500 disabled:opacity-50"
+            className="px-4 bg-red-500 text-white disabled:opacity-50"
             disabled={model === ""}
           >
             Select
