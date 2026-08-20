@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import type { UserSelections } from "./types/configurator.ts";
 
 import {
   Select,
@@ -10,14 +12,27 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export default function VehicleSelector() {
-  const [year, setYear] = useState("");
-  const [make, setMake] = useState("");
-  const [model, setModel] = useState("");
+export default function VehicleSelector({
+  UserSelection,
+  onSelectionChange,
+}: {
+  UserSelection: UserSelections;
+  onSelectionChange: (selection: UserSelections) => void;
+}) {
+  const nav = useNavigate();
+  const [year, setYear] = useState(UserSelection.vehicle.year);
+  const [make, setMake] = useState(UserSelection.vehicle.make);
+  const [model, setModel] = useState(UserSelection.vehicle.model);
 
   function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log("Selected Vehicle:", { year, make, model });
+
+    onSelectionChange({
+      ...UserSelection,
+      vehicle: { year, make, model },
+    });
+    
+    nav("/seat-coverage");
   }
 
   return (
@@ -96,7 +111,10 @@ export default function VehicleSelector() {
               </SelectContent>
             </Select>
           </div>
-          <button className="py-2 px-4 bg-red-500 disabled:opacity-50" disabled={model === ""}>
+          <button
+            className="py-2 px-4 bg-red-500 disabled:opacity-50"
+            disabled={model === ""}
+          >
             Select
           </button>
         </form>

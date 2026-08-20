@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import type { UserSelections } from "./types/configurator.ts";
 import {
   Collapsible,
   CollapsibleContent,
@@ -7,8 +8,17 @@ import {
 } from "@/components/ui/collapsible";
 import { ChevronsUpDownIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useNavigate } from "react-router-dom";
 
-export default function OptionalUpgrade() {
+export default function OptionalUpgrade({
+  UserSelection,
+  onSelectionChange,
+}: {
+  UserSelection: UserSelections;
+  onSelectionChange: (selection: UserSelections) => void;
+}) {
+  const nav = useNavigate();
+
   const UPGRADES = ["upgrade-1", "upgrade-2"] as const;
   type UpgradeValue = (typeof UPGRADES)[number];
 
@@ -18,17 +28,21 @@ export default function OptionalUpgrade() {
   };
 
   const [selectedUpgrade, setSelectedUpgrade] = useState<UpgradeValue | null>(
-    null,
+    UPGRADE_LABELS[UserSelection.upgrades[0] as UpgradeValue]
+      ? (UserSelection.upgrades[0] as UpgradeValue)
+      : null,
   );
 
   function handleSubmit() {
-    console.log("Selected Upgrade:", {
-      seat1: selectedUpgrade,
+    onSelectionChange({
+      ...UserSelection,
+      upgrades: selectedUpgrade ? [selectedUpgrade] : [],
     });
   }
 
   function handleBack() {
-    console.log("Back button clicked");
+    // navigate to previous step
+    nav("/seat-coverage");
   }
 
   return (

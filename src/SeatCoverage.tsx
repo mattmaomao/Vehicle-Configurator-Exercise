@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import type { UserSelections } from "./types/configurator.ts";
 import {
   Collapsible,
   CollapsibleContent,
@@ -7,8 +8,17 @@ import {
 } from "@/components/ui/collapsible";
 import { ChevronsUpDownIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useNavigate } from "react-router-dom";
 
-export default function SeatCoverage() {
+export default function SeatCoverage({
+  UserSelection,
+  onSelectionChange,
+}: {
+  UserSelection: UserSelections;
+  onSelectionChange: (selection: UserSelections) => void;
+}) {
+  const nav = useNavigate();
+
   const SEATS = ["seat-1", "seat-2", "other"] as const;
   type SeatValue = (typeof SEATS)[number];
 
@@ -18,8 +28,16 @@ export default function SeatCoverage() {
     other: "Don't See Your Seats?",
   };
 
-  const [selectedSeat1, setSelectedSeat1] = useState<SeatValue | null>(null);
-  const [selectedSeat2, setSelectedSeat2] = useState<SeatValue | null>(null);
+  const [selectedSeat1, setSelectedSeat1] = useState<SeatValue | null>(
+    SEAT_LABELS[UserSelection.coverage_first as SeatValue]
+      ? (UserSelection.coverage_first as SeatValue)
+      : null,
+  );
+  const [selectedSeat2, setSelectedSeat2] = useState<SeatValue | null>(
+    SEAT_LABELS[UserSelection.coverage_second as SeatValue]
+      ? (UserSelection.coverage_second as SeatValue)
+      : null,
+  );
   const [validSelection, setValidSelection] = useState(true);
 
   function handleSubmit() {
@@ -28,14 +46,19 @@ export default function SeatCoverage() {
       return;
     }
     setValidSelection(true);
-    console.log("Selected Seat:", {
-      seat1: selectedSeat1,
-      seat2: selectedSeat2,
+
+    onSelectionChange({
+      ...UserSelection,
+      coverage_first: selectedSeat1 || "",
+      coverage_second: selectedSeat2 || "",
     });
+
+    nav("/optional-upgrades");
   }
 
   function handleBack() {
-    console.log("Back button clicked");
+    // navigate to previous step
+    nav("/");
   }
 
   return (
@@ -164,8 +187,10 @@ export default function SeatCoverage() {
       </div>
 
       <div className="fixed bottom-0 left-0 right-0 z-50 flex items-center justify-end border-t border-line bg-panel px-4 py-3 gap-2">
-        <button className="py-2 px-4 bg-transparent border border-line border-black hover:cursor-pointer"
-          onClick={handleBack}>
+        <button
+          className="py-2 px-4 bg-transparent border border-line border-black hover:cursor-pointer"
+          onClick={handleBack}
+        >
           BACK
         </button>
 
